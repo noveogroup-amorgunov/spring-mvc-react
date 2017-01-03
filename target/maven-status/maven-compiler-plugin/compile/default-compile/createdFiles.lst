@@ -1,0 +1,9 @@
+com/mkyong/web/controller/AjaxController.class
+com/mkyong/web/model/SearchCriteria.class
+com/mkyong/servlet3/MyWebInitializer.class
+com/mkyong/config/SpringWebConfig.class
+com/mkyong/web/jsonview/Views.class
+com/mkyong/web/jsonview/Views$Public.class
+com/mkyong/web/model/AjaxResponseBody.class
+com/mkyong/web/controller/WelcomeController.class
+com/mkyong/web/model/User.class
