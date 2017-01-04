@@ -97,6 +97,10 @@
 					<webApp>
 						<contextPath>/spring4ajax</contextPath>
 					</webApp>
+					<httpConnector>
+						<!--host>localhost</host-->
+						<port>4017</port>
+					</httpConnector>
 				</configuration>
 			</plugin>
 

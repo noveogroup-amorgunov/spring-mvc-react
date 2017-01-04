@@ -3,7 +3,7 @@ Spring 4 MVC + ReactJS
 
 ### To Run this project locally
 ```shell
-$ git clone https://github.com/mkyong/spring4-mvc-ajax-example
+$ git clone https://github.com/noveogroup-amorgunov/spring-mvc-react.git
 $ mvn jetty:run
 ```
 Access ```http://localhost:8080/spring4ajax```
