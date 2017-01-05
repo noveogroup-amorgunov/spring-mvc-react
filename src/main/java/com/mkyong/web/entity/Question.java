@@ -5,6 +5,8 @@ import com.mkyong.web.jsonview.Views;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -19,11 +21,12 @@ public class Question {
     @JsonView(Views.Public.class)
     private long id;
 
-    @Column(name = "title", length = 64)
+    @Column(name = "title", length = 255)
     @JsonView(Views.Public.class)
     private String title;
 
     @Column(name = "comment")
+    @Type(type = "text")
     @JsonView(Views.Public.class)
     private String comment;
 

@@ -35,6 +35,7 @@ public class QuestionController {
         return new ResponseEntity<List<Question>>(questions, HttpStatus.OK);
     }
 
+    @JsonView(Views.Public.class)
     @RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getQuestion(@PathVariable("id") long id) {
         logger.info("Fetching Question with id {}", id);

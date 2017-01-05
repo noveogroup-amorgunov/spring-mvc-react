@@ -1,5 +1,7 @@
 .idea
 *~
-node_modules
 target
 *.iml
+node_modules
+dist
+/.sass-cache

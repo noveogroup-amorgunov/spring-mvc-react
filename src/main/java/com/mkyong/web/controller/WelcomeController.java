@@ -38,7 +38,7 @@ public class WelcomeController {
 
 //		logger.debug("welcome is executed");
 
-		return "welcome";
+		return "index";
 	}
 
 }

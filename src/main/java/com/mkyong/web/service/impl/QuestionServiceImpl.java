@@ -5,6 +5,7 @@ import com.mkyong.web.entity.User;
 import com.mkyong.web.repository.QuestionRepository;
 import com.mkyong.web.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -40,9 +41,18 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.saveAndFlush(user);
     }
 
+//    @Override
+//    public List<Question> getAll() {
+//        return questionRepository.findAll();
+//    }
+
     @Override
     public List<Question> getAll() {
-        return questionRepository.findAll();
+        return questionRepository.findAll(sortByIdAsc());
+    }
+
+    private Sort sortByIdAsc() {
+        return new Sort(Sort.Direction.DESC, "id");
     }
 
 }
