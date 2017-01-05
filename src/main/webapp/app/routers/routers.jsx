@@ -10,6 +10,8 @@ import {
   StuffPage,
   ContactPage,
   DashboardPage,
+  QuestionPage,
+  QuestionsByTagPage
 } from '../components/index.jsx';
 
 
@@ -29,6 +31,9 @@ export default (
 
     <Route path="/login" component={LoginPage} />
     <Route path="/logout" component={LogoutPage} />
+
+    <Route path="/questions/:id" component={QuestionPage} />
+    <Route path="/questions/tagged/:name" component={QuestionsByTagPage} />
 
     <Route path="/stuff" component={StuffPage} />
     <Route path="/contact" component={ContactPage} />

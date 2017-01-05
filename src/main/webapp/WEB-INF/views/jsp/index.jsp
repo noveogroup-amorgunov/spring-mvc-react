@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="${css}my.css">
   <link rel="stylesheet" href="${css}bundle.css">
   <link rel="stylesheet" href="${css}question.css">
+  <link rel="stylesheet" href="${css}loader-default.css">
 
   <script>
     window.config = { basename: '/spring4ajax' };
