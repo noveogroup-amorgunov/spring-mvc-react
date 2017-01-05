@@ -1,6 +1,7 @@
 package com.mkyong.config;
  
 import org.hibernate.ejb.HibernatePersistence;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -41,6 +43,17 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
 	@Resource
 	private Environment env;
+
+	@Bean
+	public FilterRegistrationBean filterRegistrationBean() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		registrationBean.setFilter(filter);
+		registrationBean.addUrlPatterns("/*");
+		return registrationBean;
+	}
 
 	@Bean
 	public DataSource dataSource() {
