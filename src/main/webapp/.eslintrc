@@ -1,0 +1,58 @@
+{
+  // "extends": "airbnb/base",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "globals": {
+    "expect": true,
+    "sinon": true
+  },
+
+  "rules": {
+    // disable requiring trailing commas, and whatever rule we want to override
+    "comma-dangle": 0
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error",
+
+      "arrowFunctions": true,
+      "binaryLiterals": true,
+      "blockBindings": true,
+      "classes": true,
+      "defaultParams": true,
+      "destructuring": true,
+      "forOf": true,
+      "generators": true,
+      "modules": true,
+      "objectLiteralComputedProperties": true,
+      "objectLiteralDuplicateProperties": true,
+      "objectLiteralShorthandMethods": true,
+      "objectLiteralShorthandProperties": true,
+      "octalLiterals": true,
+      "regexUFlag": true,
+      "regexYFlag": true,
+      "spread": true,
+      "superInFunctions": true,
+      "templateStrings": true,
+      "unicodeCodePointEscapes": true,
+      "globalReturn": true,
+      "jsx": true
+    },
+    "sourceType": "module",
+  },
+  "settings": {
+    "react": {
+      "createClass": "createClass", // Regex for Component Factory to use, default to "createClass"
+      "pragma": "React",  // Pragma to use, default to "React"
+      "version": "15.0" // React version, default to the latest React stable release
+    }
+  }
+}

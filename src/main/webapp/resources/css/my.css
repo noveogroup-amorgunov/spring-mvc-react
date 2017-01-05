@@ -1,0 +1,205 @@
+/* Rosario. I've added and changed few things. Feel free to change it as you like */
+
+/* Font size of 2.0 is too big, I'll reduce it 
+body {font-size: 1.9rem; }*/
+
+/* Adding some text shadow*/
+.site-head { padding: 40px 0; text-shadow: 2px 2px #234;}
+.site-head a {color:#eee;}
+
+/* The font is too large in the post view. Revert to small size*/
+.post-header .blog-title {font-size:inherit;}
+
+/* Reduce font size and add line-height*/
+pre{
+  font-size: 0.75em;
+  line-height: 1.4em;
+}
+
+nav {
+    font-size: 13px;
+    text-align: center;
+    padding: 0.5em;
+}
+/*nav a {
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    margin: 0.5em 1em;
+    background: #f2f2f2;
+    color: #57A3E8;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 0 1em;
+}*/
+
+nav a:hover {
+    background: #57A3E8;
+    color: #f2f2f2;
+}
+
+/* Author styling */
+.author {margin-bottom:1em;}
+.author header{
+  float:left;
+  width: 80px;
+}
+.author article{
+  margin-left:80px;
+  min-height: 80px;
+  padding-left:20px;
+}
+img.profile {
+  width:80px;
+  height:auto;
+    border-radius: 50px;
+}
+
+.PageNavigation {
+  font-size: 14px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
+
+
+@media only screen and (max-width: 900px) {
+
+    blockquote {
+        margin-left: 0;
+    }
+
+    .NewsletterSignup {
+        position: relative !important;
+    }
+
+    .site-head {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        height: auto;
+        min-height: 240px;
+        padding: 15% 0;
+    }
+
+    .blog-title {
+        font-size: 4rem;
+        letter-spacing: -1px;
+    }
+
+    .blog-description {
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+
+    .post {
+
+    }
+
+    .post-template .post {
+        padding-bottom: 1rem;
+    }
+
+    .post-template .post-header {
+        padding: 40px 0;
+    }
+
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .blog-logo img {
+        max-height: 80px;
+    }
+
+    .NewsletterSignup {
+        position: relative !important;
+    }
+
+    .inner,
+    .pagination {
+        width: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .post {
+
+    }
+
+    .site-head {
+        padding: 10% 0;
+    }
+
+    .blog-title {
+        font-size: 3rem;
+    }
+
+    .blog-description {
+        font-size: 1.5rem;
+    }
+
+
+
+
+
+    .post-template .post {
+        padding-bottom: 0;
+    }
+
+    .post-template .post-header {
+        padding: 30px 0;
+    }
+
+    .post-meta {
+        font-size: 1.3rem;
+    }
+
+    .post-footer {
+        padding: 4rem 0;
+        text-align: center;
+    }
+
+    .post-footer .author {
+        margin: 0 0 2rem 0;
+        padding: 0 0 1.6rem 0;
+        border-bottom: #EBF2F6 1px dashed;
+    }
+
+    .post-footer .share {
+        position: static;
+        width: auto;
+    }
+
+    .post-footer .share a {
+        margin: 1.4rem 0.8rem 0 0.8rem;
+    }
+
+    .older-posts,
+    .newer-posts {
+        position: static;
+        margin: 10px 0;
+    }
+
+    .page-number {
+        display: block;
+    }
+
+    .site-footer {
+        margin-top: 6rem;
+        font-size: 1.1rem;
+    }
+
+}
