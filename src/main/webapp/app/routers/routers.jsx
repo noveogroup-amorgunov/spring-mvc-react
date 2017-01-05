@@ -35,6 +35,8 @@ export default (
     <Route path="/questions/:id" component={QuestionPage} />
     <Route path="/questions/tagged/:name" component={QuestionsByTagPage} />
 
+    <Route path="/users/:name" component={QuestionsByTagPage} />
+
     <Route path="/stuff" component={StuffPage} />
     <Route path="/contact" component={ContactPage} />
     <Route path="/dashboard" component={DashboardPage} onEnter={requireAuth} />

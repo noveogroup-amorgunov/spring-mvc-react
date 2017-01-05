@@ -2,6 +2,7 @@ package com.mkyong.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mkyong.web.jsonview.Views;
+import com.mkyong.web.util.TimeAgo;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,6 +25,25 @@ public class Question {
     @Column(name = "title", length = 255)
     @JsonView(Views.Public.class)
     private String title;
+
+    //@JsonView(Views.Public.class)
+    private String ago;
+
+    public String getAgo() {
+        return TimeAgo.get(created_at.toString());
+    }
+
+    public void setAgo(String ago) {
+        this.ago = ago;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
+    }
 
     @Column(name = "comment")
     @Type(type = "text")
@@ -57,6 +77,11 @@ public class Question {
     )
     @JsonView(Views.Public.class)
     private Set<Tag> tags;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
+    @JsonView(Views.Public.class)
+    private Set<Vote> votes;
 
 
     @PrePersist

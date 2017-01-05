@@ -1,5 +1,7 @@
 package com.mkyong.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.mkyong.web.jsonview.Views;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
@@ -12,17 +14,21 @@ public class Answer {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id", length = 6, nullable = false)
+    @JsonView(Views.Public.class)
     private long id;
 
     @Column(name = "comment")
+    @JsonView(Views.Public.class)
     private String comment;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date created_at;
 
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date updated_at;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -33,6 +39,9 @@ public class Answer {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "answer")
+    @JsonView(Views.Public.class)
+    private Set<Vote> votes;
 
     public Answer() {
     }

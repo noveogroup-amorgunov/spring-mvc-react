@@ -1,4 +1,4 @@
-package com.mkyong.util;
+package com.mkyong.web.util;
 
 public class CustomErrorType {
 

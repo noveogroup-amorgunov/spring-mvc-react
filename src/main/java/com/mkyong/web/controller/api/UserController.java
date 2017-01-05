@@ -1,7 +1,7 @@
 package com.mkyong.web.controller.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mkyong.util.CustomErrorType;
+import com.mkyong.web.util.CustomErrorType;
 import com.mkyong.web.entity.User;
 import com.mkyong.web.jsonview.Views;
 import com.mkyong.web.service.UserService;
