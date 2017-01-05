@@ -22,3 +22,8 @@ Access ```http://localhost:8080/spring4ajax```
 $ cd src/webapp
 $ npm install
 ```
+#### Build bundles
+
+```shell
+$ npm run build
+```
