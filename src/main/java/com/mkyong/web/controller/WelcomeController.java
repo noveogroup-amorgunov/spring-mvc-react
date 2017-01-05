@@ -28,10 +28,10 @@ public class WelcomeController {
 		System.out.println("go to welcome contoller");
 
 
-		User user = new User();
-		user.setUsername("sasha");
-		user.setPassword("12345");
-		userService.addUser(user);
+//		User user = new User();
+//		user.setUsername("sasha");
+//		user.setPassword("12345");
+//		userService.addUser(user);
 
 //		org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger("STDOUT");
 //		log.debug("Hello world.");

@@ -1,5 +1,9 @@
 package com.mkyong.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.mkyong.web.jsonview.Views;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
@@ -12,9 +16,11 @@ public class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id", length = 6, nullable = false)
+    @JsonView(Views.Public.class)
     private long id;
 
     @Column(name = "username", length = 64, unique=true)
+    @JsonView(Views.Public.class)
     private String username;
 
     @Column(name = "password")
@@ -22,19 +28,28 @@ public class User {
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date created_at;
 
     @Column(name = "status")
+    @JsonView(Views.Public.class)
     private String status;
 
     @Column(name = "popular")
+    @JsonView(Views.Public.class)
     private Integer popular;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(value = FetchMode.SELECT)
     private Set<Question> questions;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Answer> answers;
+
+    @PrePersist
+    protected void onCreate() {
+        created_at = new Date();
+    }
 
     public User() {
     }

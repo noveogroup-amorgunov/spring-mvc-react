@@ -1,5 +1,7 @@
 package com.mkyong.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.mkyong.web.jsonview.Views;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
@@ -13,20 +15,25 @@ public class Tag {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id", length = 6, nullable = false)
+    @JsonView(Views.Public.class)
     private long id;
 
     @Column(name = "name", unique=true)
+    @JsonView(Views.Public.class)
     private String name;
 
     @Column(name = "description")
+    @JsonView(Views.Public.class)
     private String description;
 
     @Column(name = "popular")
+    @JsonView(Views.Public.class)
     private Integer popular;
 
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date created_at;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})

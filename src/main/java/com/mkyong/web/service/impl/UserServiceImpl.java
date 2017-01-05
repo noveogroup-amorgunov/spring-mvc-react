@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public User editUser(User user) {
         return userRepository.saveAndFlush(user);
     }
@@ -39,4 +44,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public boolean isUserExist(User user) { return getByUsername(user.getUsername()) != null; };
 }

@@ -1,5 +1,9 @@
 package com.mkyong.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.mkyong.web.jsonview.Views;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
@@ -12,35 +16,56 @@ public class Question {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id", length = 6, nullable = false)
+    @JsonView(Views.Public.class)
     private long id;
 
     @Column(name = "title", length = 64)
+    @JsonView(Views.Public.class)
     private String title;
 
     @Column(name = "comment")
+    @JsonView(Views.Public.class)
     private String comment;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
+    @Fetch(value = FetchMode.SELECT)
+    @JsonView(Views.Public.class)
     private User user;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
+    @JsonView(Views.Public.class)
     private Set<Answer> answers;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date created_at;
 
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.Public.class)
     private Date updated_at;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="question_tag",
             joinColumns = @JoinColumn(name="question_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="tag_id", referencedColumnName="id")
     )
+    @JsonView(Views.Public.class)
     private Set<Tag> tags;
+
+
+    @PrePersist
+    protected void onCreate() {
+        created_at = new Date();
+        updated_at = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated_at = new Date();
+    }
 
     public Question() {
     }
