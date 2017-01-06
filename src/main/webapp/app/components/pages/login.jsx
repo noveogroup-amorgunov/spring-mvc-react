@@ -14,10 +14,10 @@ const LoginPage = withRouter(
     handleSubmit(event) {
       event.preventDefault()
 
-      const email = this.refs.email.value
+      const username = this.refs.username.value
       const pass = this.refs.pass.value
 
-      auth.login(email, pass, (loggedIn) => {
+      auth.login(username, pass, (loggedIn) => {
         if (!loggedIn)
           return this.setState({ error: true })
 
@@ -34,8 +34,8 @@ const LoginPage = withRouter(
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
-          <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-          <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
+          <label><input ref="username" placeholder="username" defaultValue="joe" /></label><br />
+          <label><input ref="pass" placeholder="password" /></label> (hint: pass1)<br />
           <button type="submit">login</button>
           {this.state.error && (
             <p>Bad login information</p>

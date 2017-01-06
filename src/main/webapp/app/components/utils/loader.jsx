@@ -7,7 +7,16 @@ const Loader = React.createClass({
     const { isActive } = this.props.isActive;
 
     return (
-      <div id="loader" className="loader loader-default is-active"></div>
+      <div className="loader">
+        <div className="line-scale">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      
     );
   }
 });

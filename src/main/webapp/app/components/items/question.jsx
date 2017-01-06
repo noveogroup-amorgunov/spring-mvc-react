@@ -2,6 +2,7 @@ import React from 'react';
 import Tags from './tags';
 
 import declOfNum from '../../utils/number-dec';
+import timeAgo from '../../utils/time-ago';
 
 import { Link } from 'react-router';
 
@@ -35,7 +36,7 @@ const Question = React.createClass({
           <h3><Link to={`/questions/${id}`} className="question-hyperlink" title="">{title}</Link></h3>
           <Tags data={tags} />
           <div className="started">
-            <Link to={`/questions/${id}`} className="started-link">задан <span title={created_at} className="relativetime">50 сек. назад</span></Link>&nbsp;
+            <Link to={`/questions/${id}`} className="started-link">задан <span title={created_at} className="relativetime">{timeAgo(created_at)} назад</span></Link>&nbsp;
             <Link to={`/users/${user.username}`} className="name">{user.username}</Link> <span className="reputation-score" title="уровень репутации " dir="ltr">{user.popular || 0}</span>
           </div>
         </div>

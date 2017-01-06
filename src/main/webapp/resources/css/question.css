@@ -1,3 +1,19 @@
+.loader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center;
+  padding-top: 30%;
+  /*color: black;*/
+  /*background-color: black;*/
+}
+
+.line-scale-party>div, .line-scale-pulse-out-rapid>div, .line-scale-pulse-out>div, .line-scale>div, .line-spin-fade-loader>div {
+    border-radius: 2px;
+    margin: 2px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 .cp__item {
   width: 53px;
   text-align: center;
