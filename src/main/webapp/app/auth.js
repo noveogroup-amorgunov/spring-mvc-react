@@ -1,26 +1,52 @@
 import $ from 'jquery';
 
-function pretendRequest(username, password, cb) {
-  console.log(`pretendREquest: ${username}:${password}`);
+function pretendRegisterRequest(username, password, cb) {
+  console.log(`pretendRegisterRequest: ${username}:${password}`);
   $.ajax({
     type: 'POST',
-    url: `${window.config.basename}/api/login`,
-    dataType: 'json',
-    data: { username, password },
+    url: `${window.config.basename}/api/register`,
+    contentType: 'application/json',
+    data: JSON.stringify({ username, password }),
     success: data => {
-      console.log('success login epta');
       console.log(data);
-      if (data.success) {
+      if (data.token) {
         cb({
           authenticated: true,
           token: data.token,
         })
       } else {
-        cb({ authenticated: false })
+        cb({ authenticated: false, message: data.message })
       }
     },
     error: (xhr, status, err) => {
-      console.error(this.props.url, status, err.toString());
+      console.error(status, err.toString());
+      cb({ authenticated: false })
+    }
+  });
+}
+
+function pretendRequest(username, password, cb) {
+  console.log(`pretendREquest: ${username}:${password}`);
+  $.ajax({
+    type: 'POST',
+    url: `${window.config.basename}/api/login`,
+    // dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({ username, password }),
+    success: data => {
+      console.log(data);
+      if (data.token) {
+        cb({
+          authenticated: true,
+          token: data.token,
+        })
+      } else {
+        cb({ authenticated: false, message: data.message })
+      }
+    },
+    error: (xhr, status, err) => {
+      console.error(status, err.toString());
+      cb({ authenticated: false })
     }
   });
 
@@ -56,10 +82,32 @@ export default {
       if (res.authenticated) {
         localStorage.token = res.token
         localStorage.name = username;
-        if (cb) cb(true)
+        if (cb) cb(true, res.message)
         this.onChange(true)
       } else {
-        if (cb) cb(false)
+        if (cb) cb(false, res.message)
+        this.onChange(false)
+      }
+    })
+  },
+
+  register(username, pass, cb) {
+    cb = arguments[arguments.length - 1]
+
+    if (!username || !pass) {
+      if (cb) cb(false, `Введите логин и пароль`)
+      this.onChange(false)
+      return 
+    }
+
+    pretendRegisterRequest(username, pass, (res) => {
+      if (res.authenticated) {
+        localStorage.token = res.token
+        localStorage.name = username;
+        if (cb) cb(true, res.message)
+        this.onChange(true)
+      } else {
+        if (cb) cb(false, res.message)
         this.onChange(false)
       }
     })

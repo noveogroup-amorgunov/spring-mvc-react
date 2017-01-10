@@ -7,7 +7,6 @@ import routes from 'routers/routers.jsx';
 
 import { createHistory } from 'history'
 
-
 const Company = React.createClass({
     render() {
         const title = this.props.data.text;

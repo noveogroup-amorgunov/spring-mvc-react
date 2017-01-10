@@ -8,7 +8,7 @@ const LogoutPage = React.createClass({
 
   render() {
     return (
-      <p>You are now logged out</p>
+      <p>Вы успешно вышли из системы</p>
     );
   }
 });

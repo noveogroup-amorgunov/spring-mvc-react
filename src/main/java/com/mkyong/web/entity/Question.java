@@ -45,14 +45,13 @@ public class Question {
         this.votes = votes;
     }
 
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition="TEXT")
     @Type(type = "text")
     @JsonView(Views.Public.class)
     private String comment;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
-    @Fetch(value = FetchMode.SELECT)
     @JsonView(Views.Public.class)
     private User user;
 
@@ -96,6 +95,14 @@ public class Question {
     }
 
     public Question() {
+    }
+
+    public Question(String title, String comment, User user, Set<Tag> tags) {
+        this.title = title;
+        this.comment = comment;
+        this.user = user;
+
+        this.tags = tags;
     }
 
     public Question(String title, String comment, User user, Set<Answer> answers, Date created_at, Date updated_at, Set<Tag> tags) {

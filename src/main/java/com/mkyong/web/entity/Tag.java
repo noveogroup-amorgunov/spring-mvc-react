@@ -46,6 +46,13 @@ public class Tag {
     public Tag() {
     }
 
+    public Tag(String name, String description, User user) {
+        this.name = name;
+        this.description = description;
+        this.popular = 1;
+        this.user = user;
+    }
+
     public Tag(String name, String description, Integer popular, Date created_at, User user, Set<Question> questions) {
         this.name = name;
         this.description = description;

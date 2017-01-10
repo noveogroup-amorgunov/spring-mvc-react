@@ -11,6 +11,7 @@
   "dependencies": {
     "history": "^2.1.2",
     "jquery": "^3.1.1",
+    "prismjs": "^1.6.0",
     "react": "^15.4.0",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.4.0",

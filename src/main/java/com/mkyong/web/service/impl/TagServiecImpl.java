@@ -39,4 +39,15 @@ public class TagServiecImpl implements TagService {
     public List<Tag> getAll() {
         return tagRepository.findAll();
     }
+
+    @Override
+    public Tag getById(Long id) {
+        return tagRepository.findById(id);
+    }
+
+    @Override
+    public List<Tag> getByCharacters(String searchTerm) {
+        return tagRepository.findByCharacters(searchTerm);
+    }
+
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import auth from '../../auth';
 import { withRouter  } from 'react-router';
 
-const LoginPage = withRouter(
+const SignupPage = withRouter(
   React.createClass({
 
     getInitialState() {
@@ -18,7 +18,7 @@ const LoginPage = withRouter(
       const username = this.refs.username.value
       const pass = this.refs.pass.value
 
-      auth.login(username, pass, (loggedIn, message = 'Введены неверные данные') => {
+      auth.register(username, pass, (loggedIn, message = 'Введены неверные данные') => {
         if (!loggedIn)
           return this.setState({ error: true, message })
 
@@ -35,9 +35,9 @@ const LoginPage = withRouter(
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
-          <label><input required="required" ref="username" placeholder="username" defaultValue="joe" /></label><br />
+          <label><input required="required" ref="username" placeholder="username" /></label><br />
           <label><input required="required" ref="pass" placeholder="password" /></label><br />
-          <button type="submit">Войти в систему</button>
+          <button type="submit">Зарегистрироваться</button>
           {this.state.error && (
             <p>{this.state.message}</p>
           )}
@@ -47,4 +47,4 @@ const LoginPage = withRouter(
   })
 )
 
-export default LoginPage;
+export default SignupPage;

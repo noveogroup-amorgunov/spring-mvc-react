@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="${css}bundle.css">
   <link rel="stylesheet" href="${css}loaders.min.css">
   <link rel="stylesheet" href="${css}question.css">
+  <link rel="stylesheet" href="${css}prism.css">
   <!-- <link rel="stylesheet" href="${css}loader-default.css"> -->
 
   <script>
@@ -33,5 +34,6 @@
 <body>
   <div id="app" class="wrapper"></div>
   <script src="${js}/bundle.js"></script>
+  <script src="${js}/prism.js"></script>
 </body>
 </html>

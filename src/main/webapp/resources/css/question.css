@@ -1,3 +1,60 @@
+.margin_top_100 {
+  margin-top: 100px;
+}
+
+.user-info {
+  margin-top: 10px;
+  box-sizing: border-box;
+  padding: 5px 6px 7px 7px;
+  width: 160px;
+  color: #6a737c;
+  float: right;
+  background: #efefef;
+  font-size: 12px;
+}
+
+.light {
+  border: 0;
+  height: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.code-inline {
+  background: #f5f5f5;
+/*  background: #3a4145;
+  color: white;*/
+  display: inline-block;
+  padding: 0 2px;
+  font-family: 'Courier new';
+  font-size: 0.9em;
+}
+
+
+.tags-label {
+  height:40px;padding-top: 10px;
+}
+
+.tags-label b {
+  float:left;
+}
+
+.menu .active u {
+  color: #ffffff !important;
+  background: #484646;
+  border-radius: 1px;
+}
+
+.menu .right a.active {
+  color: #ffffff !important;
+  background: #484646;
+  border-radius: 1px;
+}
+
+.menu .li a {
+    margin: 8px 10px !important;
+    padding: 0 !important;
+}
+
 .loader {
   width: 100%;
   height: 100%;

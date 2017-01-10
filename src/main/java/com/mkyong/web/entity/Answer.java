@@ -3,6 +3,8 @@ package com.mkyong.web.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mkyong.web.jsonview.Views;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -17,7 +19,8 @@ public class Answer {
     @JsonView(Views.Public.class)
     private long id;
 
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition="TEXT")
+    @Type(type = "text")
     @JsonView(Views.Public.class)
     private String comment;
 
@@ -33,6 +36,7 @@ public class Answer {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonView(Views.Public.class)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -43,7 +47,24 @@ public class Answer {
     @JsonView(Views.Public.class)
     private Set<Vote> votes;
 
+    @PrePersist
+    protected void onCreate() {
+        created_at = new Date();
+        updated_at = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated_at = new Date();
+    }
+
     public Answer() {
+    }
+
+    public Answer(String comment, User user, Question question) {
+        this.comment = comment;
+        this.user = user;
+        this.question = question;
     }
 
     public Answer(String comment, Date created_at, Date updated_at, User user, Question question) {

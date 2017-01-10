@@ -93,6 +93,10 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 		properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
 		properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
 
+		properties.put("hibernate.connection.CharSet", "utf-8");
+		properties.put("hibernate.connection.useUnicode", true);
+		properties.put("hibernate.connection.characterEncoding", "utf-8");
+
 		return properties;
 	}
 

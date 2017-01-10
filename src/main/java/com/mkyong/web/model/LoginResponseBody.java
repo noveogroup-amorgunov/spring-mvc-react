@@ -11,12 +11,29 @@ public class LoginResponseBody {
     @JsonView(Views.Public.class)
     String token;
 
+    @JsonView(Views.Public.class)
+    String message;
+
     public LoginResponseBody() {
+    }
+
+    public LoginResponseBody(Boolean authenticated, String token, String message) {
+        this.authenticated = authenticated;
+        this.token = token;
+        this.message = message;
     }
 
     public LoginResponseBody(Boolean authenticated, String token) {
         this.authenticated = authenticated;
         this.token = token;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Boolean getAuthenticated() {

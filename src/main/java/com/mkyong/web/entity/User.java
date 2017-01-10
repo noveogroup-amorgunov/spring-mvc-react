@@ -40,7 +40,6 @@ public class User {
     private Integer popular;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @Fetch(value = FetchMode.SELECT)
     private Set<Question> questions;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

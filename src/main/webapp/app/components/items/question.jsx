@@ -11,7 +11,7 @@ const Question = React.createClass({
     const { id, answers, comment, title, created_at, tags, user, updated_at, votes } = this.props.data;
 
     const popular = votes.filter(t => t.mark === 'UP').length - votes.filter(t => t.mark === 'DOWN').length;
-    const popularText = declOfNum(answers.length, [`голос`, `голоса`, `голосов`]);
+    const popularText = declOfNum(popular, [`голос`, `голоса`, `голосов`]);
     const answersCountText = declOfNum(answers.length, [`ответ`, `ответа`, `ответов`]);
     console.log(votes);
     console.log(popular);
