@@ -2,7 +2,6 @@ package com.mkyong.web.service;
 
 import com.mkyong.web.entity.Vote;
 import java.util.List;
-import java.util.List;
 
 public interface VoteService {
     Vote addVote(Vote vote);

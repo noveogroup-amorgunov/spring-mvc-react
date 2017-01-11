@@ -4,18 +4,20 @@ import com.mkyong.web.entity.Vote;
 import com.mkyong.web.repository.VoteRepository;
 import com.mkyong.web.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VoteServiceImpl implements VoteService {
     @Autowired
     private VoteRepository voteRepository;
 
     @Override
     public Vote addVote(Vote tag) {
-        Vote savedBank = voteRepository.saveAndFlush(tag);
+        Vote savedTag = voteRepository.saveAndFlush(tag);
 
-        return savedBank;
+        return savedTag;
     }
 
     @Override
@@ -29,8 +31,8 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public Vote editVote(Vote user) {
-        return voteRepository.saveAndFlush(user);
+    public Vote editVote(Vote tag) {
+        return voteRepository.saveAndFlush(tag);
     }
 
     @Override

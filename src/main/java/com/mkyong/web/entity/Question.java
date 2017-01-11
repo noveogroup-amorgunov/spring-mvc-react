@@ -57,6 +57,7 @@ public class Question {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
     @JsonView(Views.Public.class)
+    @OrderBy("id DESC")
     private Set<Answer> answers;
 
     @Column(name = "created_at")

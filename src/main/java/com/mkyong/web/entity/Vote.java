@@ -37,6 +37,7 @@ public class Vote {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonView(Views.Public.class)
     private User user;
 
     @Column(name = "mark")
@@ -44,7 +45,7 @@ public class Vote {
     @JsonView(Views.Public.class)
     private VoteMark mark;
 
-    public Vote(VoteModule module, Question question, Answer answer, User user, long user_id, VoteMark mark) {
+    public Vote(VoteModule module, Question question, Answer answer, User user, VoteMark mark) {
         this.module = module;
         this.question = question;
         this.answer = answer;

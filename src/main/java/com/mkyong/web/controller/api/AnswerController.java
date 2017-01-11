@@ -14,9 +14,12 @@ import com.mkyong.web.service.QuestionService;
 import com.mkyong.web.service.TagService;
 import com.mkyong.web.service.UserService;
 import com.mkyong.web.util.CustomErrorType;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +34,9 @@ import java.util.Set;
 @RequestMapping("/api")
 public class AnswerController {
     public static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
+    @Value("${jwt.secret}")
+    private String key;
 
     @Autowired
     QuestionService questionService;
@@ -73,11 +79,35 @@ public class AnswerController {
         // TODO: 07.01.2017
         // verifyToken();
 
-        String login = "joe";
-        User user = userService.getById(6L); //login);
+        String userName = null;
+
+        try {
+
+            if (data.getToken() == null) {
+                throw new SignatureException("Token is required");
+            }
+            Jwts.parser().setSigningKey(key).parseClaimsJws(data.getToken());
+
+            userName = Jwts.parser().setSigningKey(key).parseClaimsJws(data.getToken()).getBody().getSubject();
+
+            //OK, we can trust this JWT
+
+        } catch (Exception e) {
+            result.setCode("404");
+            result.setMsg("Wrong token");
+
+            return result;
+        }
+
+
+//        String login = "joe";
+//        User user = userService.getById(1L); //login);
+
+        User user = userService.getByUsername(userName);
 
         Question question = questionService.getById(data.getQuestion_id());
 
+        // prevent error of two instance of one object
         if (Objects.equals(question.getUser().getUsername(), user.getUsername())) {
             user = question.getUser();
         }
