@@ -7,3 +7,4 @@ dist
 /.sass-cache
 
 src/main/webapp/resources/dist/bundle.js
+src/main/webapp/resources/js/bundle.js
