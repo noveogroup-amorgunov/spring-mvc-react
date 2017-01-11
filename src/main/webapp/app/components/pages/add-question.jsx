@@ -3,6 +3,7 @@ import { withRouter  } from 'react-router';
 import ReactDOM from 'react-dom';
 
 import auth from '../../auth';
+import formatText from '../../utils/format-str';
 
 
 const TagsVariants = React.createClass({
@@ -164,6 +165,11 @@ const AddQuestionPage = withRouter(
       }
     },
 
+    onChangeAnswer() {
+      const comment = this.refs.comment.value.trim();
+      $('.preview').html(formatText(comment));
+    },
+
     render() {
 
       const tags = this.state.tags;
@@ -173,21 +179,23 @@ const AddQuestionPage = withRouter(
           <h1>Добавить вопрос</h1>
             <form onSubmit={this.handleSubmit}>
               Название вопроса: <input ref="title" type="text" name="title" required="required" /><br />
-              Описание: <textarea ref="comment" name="comment" required="required" /><br />
-              
-              Добавить тег: 
+              Описание: <textarea onChange={this.onChangeAnswer} className="comment" ref="comment" name="comment" required="required" /><br />
+              <hr className="light" />
+              <div className="preview"></div>
+              <hr className="light" /> 
+              Добавить метку (тэг): 
               <input 
                 id="add-tag"
                 type="text"
                 ref='searched'
                 value={this.state.inputValue}
                 onChange={this.onChange}
-                placeholder="Введите тег" /> <a href="#" onClick={this.addNewTag}>Добавить новый тэг</a>
+                placeholder="Введите метку" /> <a href="#" onClick={this.addNewTag}>Добавить новую метку</a>
               
               <TagsVariants onAddNewTag={this.onAddNewTag} data={this.state.findedTags} />
               <SelectedTags onTagClick={this.onTagClick} data={tags} />
               <br />
-              <button type="submit">Добавить вопрос</button>
+              <button className="btn btn-block btn-social btn-github" type="submit">Добавить вопрос</button>
               {this.state.error && (
                 <p>{this.state.message}</p>
               )}

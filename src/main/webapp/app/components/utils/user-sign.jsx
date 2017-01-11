@@ -6,12 +6,13 @@ const Answer = React.createClass({
   render() {
     const user = this.props.data.user;
     const created_at = this.props.data.created_at;
+    const text = this.props.data.text || `Задан`;
 
 
     return (
       <div className="user-info clear">
           <div className="user-action-time">
-              Задан <span title="" className="relativetime">{timeAgo(created_at)} назад</span>
+              {text} <span title="" className="relativetime">{timeAgo(created_at)}</span>
           </div>
           <div className="user-details">
               <Link to={`/users/${user.username}`}>{user.username}</Link>

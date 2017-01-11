@@ -1,13 +1,29 @@
+var tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+
+function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+}
+
+function safe_tags_replace(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+}
+
+
 export default function formatText(comment) {
   // bold texts
   // comment.match(/\*(.*?)\*/gi).map(i => {
   //   <pre class="language-"><code class="language-"></code></pre>
   // });
 
+
+  let html = safe_tags_replace(comment);
+
   // console.log(html);
-
-  let html = comment;
-
+  
   // comment.match(/```(.*?)```/gi).map(text => {
   const codeFragments = comment.match(/```([\s\S]*?)```/gi) || [];
 
@@ -16,14 +32,18 @@ export default function formatText(comment) {
     html = html.replace(text, `<pre class="language-"><code class="language-">${code}</code></pre>`);
   });
 
-  const codeInlineFragments = comment.match(/`(.*?)`/gi) || [];
+  // console.log(html);
+
+  const codeInlineFragments = html.match(/`(.*?)`/gi) || [];
+  
+  // console.log(codeInlineFragments);
 
   codeInlineFragments.map(text => {
     const code = text.slice(1, -1);
     html = html.replace(text, `<span class="code-inline">${code}</span>`);
   });
 
-  const boldFragments = comment.match(/\*(.*?)\*/gi) || [];
+  const boldFragments = html.match(/\*(.*?)\*/gi) || [];
 
   boldFragments.map(text => {
     const code = text.slice(1, -1);
@@ -33,5 +53,5 @@ export default function formatText(comment) {
 
   // var code = "var data = 1;";
   // var html = Prism.highlight(code, Prism.languages.javascript);
-  return html.replace(/\n\n/g, "<br />");;
+  return html.replace(/\n\n/g, "<br /><br />");;
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import auth from '../../auth';
 import { withRouter  } from 'react-router';
 
+import t from '../../utils/messages';
+
 const SignupPage = withRouter(
   React.createClass({
 
@@ -20,7 +22,7 @@ const SignupPage = withRouter(
 
       auth.register(username, pass, (loggedIn, message = 'Введены неверные данные') => {
         if (!loggedIn)
-          return this.setState({ error: true, message })
+          return this.setState({ error: true, message: t(message) })
 
         const { location } = this.props
 
@@ -36,8 +38,8 @@ const SignupPage = withRouter(
       return (
         <form onSubmit={this.handleSubmit}>
           <label><input required="required" ref="username" placeholder="username" /></label><br />
-          <label><input required="required" ref="pass" placeholder="password" /></label><br />
-          <button type="submit">Зарегистрироваться</button>
+          <label><input required="required" type="password" ref="pass" placeholder="password" /></label><br />
+          <button className="btn btn-block btn-social btn-linkedin" type="submit">Зарегистрироваться</button>
           {this.state.error && (
             <p>{this.state.message}</p>
           )}

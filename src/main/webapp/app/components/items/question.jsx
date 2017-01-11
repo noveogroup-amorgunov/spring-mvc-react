@@ -11,10 +11,10 @@ const Question = React.createClass({
     const { id, answers, comment, title, created_at, tags, user, updated_at, votes } = this.props.data;
 
     const popular = votes.filter(t => t.mark === 'UP').length - votes.filter(t => t.mark === 'DOWN').length;
-    const popularText = declOfNum(popular, [`голос`, `голоса`, `голосов`]);
+    const popularText = declOfNum(Math.abs(popular), [`голос`, `голоса`, `голосов`]);
     const answersCountText = declOfNum(answers.length, [`ответ`, `ответа`, `ответов`]);
-    console.log(votes);
-    console.log(popular);
+    // console.log(votes);
+    // console.log(popular);
 
     return (
       <div className="question-summary narrow" id={`question-summary-${id}`}>
@@ -36,7 +36,7 @@ const Question = React.createClass({
           <h3><Link to={`/questions/${id}`} className="question-hyperlink" title="">{title}</Link></h3>
           <Tags data={tags} />
           <div className="started">
-            <Link to={`/questions/${id}`} className="started-link">задан <span title={created_at} className="relativetime">{timeAgo(created_at)} назад</span></Link>&nbsp;
+            <Link to={`/questions/${id}`} className="started-link">задан <span title={created_at} className="relativetime">{timeAgo(created_at)}</span></Link>&nbsp;
             <Link to={`/users/${user.username}`} className="name">{user.username}</Link> <span className="reputation-score" title="уровень репутации " dir="ltr">{user.popular || 0}</span>
           </div>
         </div>

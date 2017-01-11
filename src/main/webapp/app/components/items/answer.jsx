@@ -5,6 +5,8 @@ import timeAgo from '../../utils/time-ago';
 import formatText from '../../utils/format-str';
 import UserSign from '../utils/user-sign';
 
+import Vote from './vote';
+
 import { Link } from 'react-router';
 
 const Answer = React.createClass({
@@ -15,10 +17,11 @@ const Answer = React.createClass({
     const popularText = declOfNum(popular, [`голос`, `голоса`, `голосов`]);
     const html = formatText(comment);
 
-    const data = { user, created_at };
+    const data = { user, created_at, text: `Ответ дан ` };
 
     return (
-      <div className="question-summary narrow" id={`question-summary-${id}`}>
+      <div className="answer-summary narrow" id={`answer-summary-${id}`}>
+        <Vote data={{ votes, user, answerId: id, popular }} />
         <div dangerouslySetInnerHTML={{__html: html}}></div>
         <UserSign data={data} />
       </div>

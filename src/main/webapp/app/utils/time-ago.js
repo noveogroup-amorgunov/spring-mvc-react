@@ -15,8 +15,8 @@ const TRANSLATIONS = {
   month:  [`месяц`, `месяца`, `месяцев`],
   day:    [`день`, `дня`, `дней`],
   hour:   [`час`, `часа`, `часов`],
-  minute: [`минута`, `минуты`, `минут`],
-  second: [`секунда`, `секунды`, `секунд`]
+  minute: [`минуту`, `минуты`, `минут`],
+  second: [`секунду`, `секунды`, `секунд`]
 };
 
 function getDuration(seconds) {
@@ -34,8 +34,11 @@ function getDuration(seconds) {
 function timeAgo(date) {
   var seconds = Math.floor((new Date() - new Date(date)) / 1000);
   var duration = getDuration(seconds);
-  var suffix  = (duration.interval > 1 || duration.interval === 0) ? 's' : '';
-  return duration.interval + ' ' + duration.epoch; // + suffix;
+  if (!duration || !duration.interval) {
+    return `только что`;
+  }
+  var suffix  = ` назад`; //(duration.interval > 1 || duration.interval === 0) ? 's' : '';
+  return duration.interval + ' ' + duration.epoch + suffix;
 }
 
 

@@ -30,6 +30,10 @@ const Questions = React.createClass({
 
     const data = this.state.questions;
 
+    if (!data || !data.length) {
+      return (<div>Вопросов пока нет</div>);
+    }
+
     return (
       <div className="question-list">
         {data.map((item, index) => 
