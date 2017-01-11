@@ -75,8 +75,20 @@ public class VoteController {
             mark = VoteMark.UP;
         }
 
+        if (question != null) {
+            if (Objects.equals(user.getUsername(), question.getUser().getUsername())) {
+                user = question.getUser();
+            }
+        } else if (answer != null) {
+            if (Objects.equals(user.getUsername(), answer.getQuestion().getUser().getUsername())) {
+                user = answer.getQuestion().getUser();
+            }
+        }
+
         Vote vote = new Vote(null, question, answer, user, mark);
         vote = voteService.addVote(vote);
+
+
 
         result.setCode("201");
         result.setMsg(Long.toString(vote.getId()));
