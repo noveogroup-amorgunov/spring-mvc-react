@@ -5,3 +5,5 @@ target
 node_modules
 dist
 /.sass-cache
+
+src/main/webapp/resources/dist/bundle.js
