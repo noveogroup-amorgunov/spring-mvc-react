@@ -1,3 +1,82 @@
+.token-text {
+  font-size: 0.6em;
+}
+
+.post-container {
+  padding: 14px 0 13px 0;
+  border-bottom: 1px solid #e4e6e8;
+  font-size: 13px;
+  margin-left: 70px;
+  height: 50px;
+}
+
+.post-container>a {
+  float: left;
+
+}
+
+/*.post-container .vote {
+  border-color: #5fba7d;
+  background: #5fba7d;
+  color: #FFF;
+}*/
+
+.post-container .vote {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.3;
+  text-align: center;
+  color: #6a737c;
+  min-width: 36px;
+  height: auto;
+  padding: 3px 6px;
+  margin-right: 10px;
+  display: inline-block;
+  border: 1px solid #b9b9b9;
+  border-radius: 2px;
+}
+
+.post-container a, .post-container .post-date {
+  padding-top: 4px;
+}
+
+.post-date {
+  display: block;
+  float: right;
+}
+
+.post-container a {
+  font-size: 13px;
+  font-weight: 400;
+  /*width: 79%;*/
+  margin-bottom: 0;
+  float: left;
+}
+
+.user-stats {
+  color: #666;
+  padding: 10px;
+  font-size: 0.8em;
+  margin-bottom: 30px;
+}
+
+.user-stats .number {
+  display: block;
+  color: #0C0D0E;
+  font-weight: 700;
+  font-size: 1.8em;
+}
+
+.col-3 {
+    width: 100px;
+    float: left;
+}
+
+/* ........................ */
+
+
+
+
 textarea {
   padding: 10px;
   height: 200px;

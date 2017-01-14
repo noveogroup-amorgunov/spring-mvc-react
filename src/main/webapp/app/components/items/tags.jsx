@@ -5,6 +5,10 @@ const Tags = React.createClass({
   render() {
     const { data } = this.props;
 
+    if (!data[0].name) {
+      return (<div className="tags"></div>);
+    }
+
     return (
       <div className="tags">
         {data.map((item, index) => 

@@ -15,7 +15,7 @@ var Header = React.createClass({
                 </Link>
               </li>
               <li className="li"><Link to="/add" activeClassName="active"><u>Добавить</u></Link></li>
-              <li className="li"><Link to="/contact" activeClassName="active"><u>Теги</u></Link></li>
+              <li className="li"><Link to="/tags" activeClassName="active"><u>Теги</u></Link></li>
               <li className="li"><Link to="/dashboard" activeClassName="active"><u>Профиль</u></Link></li>
               <li title={"You are " + (this.props.loggedIn ? '' : 'not') + " logged in."} className="li right">  
                 {this.props.loggedIn ? (

@@ -4,6 +4,8 @@ import $ from 'jquery';
 import Question from './question';
 import Loader from '../utils/loader';
 
+import QuestionService from '../../services/question';
+
 const Questions = React.createClass({
   getInitialState() {
     return {
@@ -12,16 +14,18 @@ const Questions = React.createClass({
     };
   },
   componentDidMount() {
-    $.ajax({
-      url: `${window.config.basename}/api/questions`,
-      dataType: 'json',
-      success: (questions) => {
+    const tag = this.props.tag || false;
+    const service = new QuestionService();
+
+    if (tag) {
+      service.getByTag(tag).then(questions => {
         this.setState({ questions, loading: false });
-      },
-      error: (xhr, status, err) => {
-        console.error(this.props.url, status, err.toString());
-      }
-    });
+      });
+    } else {
+       service.get().then(questions => {
+         this.setState({ questions, loading: false });
+       });     
+    }
   },
   render() {
     if (this.state.loading) {
@@ -29,18 +33,22 @@ const Questions = React.createClass({
     }
 
     const data = this.state.questions;
+    const tag = this.props.tag;
 
     if (!data || !data.length) {
       return (<div>Вопросов пока нет</div>);
     }
 
     return (
-      <div className="question-list">
-        {data.map((item, index) => 
-          <div key={index}>
-            <Question data={item} />
-          </div>
-        )}
+      <div>
+        { tag && (<h2>Вопросы с тегом "{tag}"</h2>) }
+        <div className="question-list">
+          {data.map((item, index) => 
+            <div key={index}>
+              <Question data={item} />
+            </div>
+          )}
+        </div>
       </div>
     );
   }
