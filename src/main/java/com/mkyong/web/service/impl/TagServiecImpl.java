@@ -1,9 +1,11 @@
 package com.mkyong.web.service.impl;
 
+import com.mkyong.web.entity.Question;
 import com.mkyong.web.entity.Tag;
 import com.mkyong.web.repository.TagRepository;
 import com.mkyong.web.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,11 @@ public class TagServiecImpl implements TagService {
 
     @Override
     public List<Tag> getAll() {
-        return tagRepository.findAll();
+        return tagRepository.findAll(sortByPopuparDesc());
+    }
+
+    private Sort sortByPopuparDesc() {
+        return new Sort(Sort.Direction.DESC, "popular");
     }
 
     @Override

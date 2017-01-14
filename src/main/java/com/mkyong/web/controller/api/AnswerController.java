@@ -3,19 +3,15 @@ package com.mkyong.web.controller.api;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mkyong.web.entity.Answer;
 import com.mkyong.web.entity.Question;
-import com.mkyong.web.entity.Tag;
 import com.mkyong.web.entity.User;
 import com.mkyong.web.jsonview.Views;
 import com.mkyong.web.model.AjaxResponseBody;
 import com.mkyong.web.model.AnswerModel;
-import com.mkyong.web.model.QuestionModel;
 import com.mkyong.web.service.AnswerService;
 import com.mkyong.web.service.QuestionService;
-import com.mkyong.web.service.TagService;
 import com.mkyong.web.service.UserService;
+import com.mkyong.web.util.AuthService;
 import com.mkyong.web.util.CustomErrorType;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -72,36 +66,36 @@ public class AnswerController {
     }
 
     @JsonView(Views.Public.class)
+    @RequestMapping(value = "/answer/user/{name}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAnswersByUser(@PathVariable("name") String name) {
+
+        User user = userService.getByUsername(name);
+
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+
+        List<Answer> answers = answerService.getByUser(user);
+        if (answers.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Answer>>(answers, HttpStatus.OK);
+    }
+
+    @JsonView(Views.Public.class)
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
     public AjaxResponseBody createQuestion(@RequestBody AnswerModel data, UriComponentsBuilder ucBuilder) {
         logger.info("Creating Answer : {}", data);
         AjaxResponseBody result = new AjaxResponseBody();
-        // TODO: 07.01.2017
-        // verifyToken();
 
-        String userName = null;
-
-        try {
-
-            if (data.getToken() == null) {
-                throw new SignatureException("Token is required");
-            }
-            Jwts.parser().setSigningKey(key).parseClaimsJws(data.getToken());
-
-            userName = Jwts.parser().setSigningKey(key).parseClaimsJws(data.getToken()).getBody().getSubject();
-
-            //OK, we can trust this JWT
-
-        } catch (Exception e) {
+        AuthService authService = new AuthService(data.getToken(), key);
+        if (authService.getUserName() == null) {
             result.setCode("404");
-            result.setMsg("Wrong token");
-
+            result.setMsg(authService.getMessage());
             return result;
         }
-
-
-//        String login = "joe";
-//        User user = userService.getById(1L); //login);
+        //OK, we can trust this JWT
+        String userName = authService.getUserName();
 
         User user = userService.getByUsername(userName);
 

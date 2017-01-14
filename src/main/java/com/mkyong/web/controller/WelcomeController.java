@@ -23,7 +23,7 @@ public class WelcomeController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = { "/*", "/*/*" }, method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		System.out.println("go to welcome contoller");
 

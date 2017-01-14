@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
-    @Query(value = "SELECT * FROM Answer t WHERE t.user_id = :id",
+    @Query(value = "SELECT * FROM answer t WHERE t.user_id = :id",
             nativeQuery=true
     )
     List<Answer> findByUser(@Param("id") Long id);

@@ -1,6 +1,7 @@
 package com.mkyong.web.service.impl;
 
 import com.mkyong.web.entity.Question;
+import com.mkyong.web.entity.Tag;
 import com.mkyong.web.entity.User;
 import com.mkyong.web.repository.QuestionRepository;
 import com.mkyong.web.service.QuestionService;
@@ -30,6 +31,12 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getByUser(User user) {
         return questionRepository.findByUser(user.getId());
     }
+
+    @Override
+    public List<Question> getByTag(Tag tag) {
+        return questionRepository.findByTag(tag.getId());
+    }
+
 
     @Override
     public Question getById(Long id) {

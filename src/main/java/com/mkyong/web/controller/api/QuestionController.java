@@ -9,6 +9,7 @@ import com.mkyong.web.model.LoginResponseBody;
 import com.mkyong.web.model.QuestionModel;
 import com.mkyong.web.service.TagService;
 import com.mkyong.web.service.UserService;
+import com.mkyong.web.util.AuthService;
 import com.mkyong.web.util.CustomErrorType;
 import com.mkyong.web.entity.Question;
 import com.mkyong.web.jsonview.Views;
@@ -19,6 +20,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ import java.util.*;
 @RequestMapping("/api")
 public class QuestionController {
     public static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
+    @Value("${jwt.secret}")
+    private String key;
 
     @Autowired
     QuestionService questionService; //Service which will do all data retrieval/manipulation work
@@ -66,15 +71,56 @@ public class QuestionController {
     }
 
     @JsonView(Views.Public.class)
+    @RequestMapping(value = "/questions/user/{name}", method = RequestMethod.GET)
+    public ResponseEntity<?> getQuestionsByUser(@PathVariable("name") String name) {
+
+        User user = userService.getByUsername(name);
+
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+
+        List<Question> questions = questionService.getByUser(user);
+        if (questions.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Question>>(questions, HttpStatus.OK);
+    }
+
+    @JsonView(Views.Public.class)
+    @RequestMapping(value = "/questions/tag/{name}", method = RequestMethod.GET)
+    public ResponseEntity<?> getQuestionsByTag(@PathVariable("name") String name) {
+
+        Tag tag = tagService.getByName(name);
+
+        if (tag == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+
+        List<Question> questions = questionService.getByTag(tag);
+        if (questions.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Question>>(questions, HttpStatus.OK);
+    }
+
+    @JsonView(Views.Public.class)
     @RequestMapping(value = "/question", method = RequestMethod.POST)
     public AjaxResponseBody createQuestion(@RequestBody QuestionModel data, UriComponentsBuilder ucBuilder) {
         logger.info("Creating Question : {}", data);
         AjaxResponseBody result = new AjaxResponseBody();
-        // TODO: 07.01.2017
-        // verifyToken();
 
-        String login = "joe";
-        User user = userService.getByUsername(login);
+        AuthService authService = new AuthService(data.getToken(), key);
+        if (authService.getUserName() == null) {
+            result.setCode("404");
+            result.setMsg(authService.getMessage());
+            return result;
+        }
+        //OK, we can trust this JWT
+        String userName = authService.getUserName();
+
+
+        User user = userService.getByUsername(userName);
 
         String[] tagNames = data.getTags().split(",");
         Set<Tag> tags = new HashSet<>();
@@ -91,14 +137,6 @@ public class QuestionController {
             }
             tags.add(tag);
         }
-
-//        Category category1 = new Category("CONSUMER", "CONSUMER COMPANY");
-//        Category category2 = new Category("INVESTMENT", "INVESTMENT COMPANY");
-//
-//        Set<Category> categories = new HashSet<Category>();
-//        categories.add(category1);
-//        categories.add(category2);
-
 
         Question question = new Question(data.getTitle(), data.getComment(), user, tags);
         question = questionService.addQuestion(question);

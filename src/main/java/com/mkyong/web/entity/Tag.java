@@ -43,6 +43,11 @@ public class Tag {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tags")
     private Set<Question> questions;
 
+    @PrePersist
+    protected void onCreate() {
+        created_at = new Date();
+    }
+
     public Tag() {
     }
 
