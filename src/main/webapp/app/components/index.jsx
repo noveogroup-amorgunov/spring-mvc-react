@@ -8,6 +8,8 @@ import QuestionPage from './pages/question.jsx';
 import QuestionsByTagPage from './pages/question-by-tag.jsx';
 import TagsPage from './pages/tags.jsx';
 import SignupPage from './pages/signup.jsx';
+import UserPage from './pages/user.jsx';
+import ChangePasswordPage from './pages/change-password.jsx';
 
 import HeaderLayout from './layout/header.jsx';
 import FooterLayout from './layout/footer.jsx';
@@ -25,7 +27,9 @@ export {
   QuestionPage,
   QuestionsByTagPage,
   TagsPage,
-  SignupPage
+  SignupPage,
+  UserPage,
+  ChangePasswordPage
 };
 
 export default {
@@ -40,5 +44,7 @@ export default {
   QuestionPage,
   QuestionsByTagPage,
   TagsPage,
-  SignupPage
+  SignupPage,
+  UserPage,
+  ChangePasswordPage
 };

@@ -73,7 +73,7 @@ const AddQuestionPage = withRouter(
         type: 'POST',
         url: `${window.config.basename}/api/question`,
         contentType: 'application/json',
-        data: JSON.stringify({ title, comment, tags }),
+        data: JSON.stringify({ title, comment, tags, token: auth.getToken() }),
         success: data => {
           console.log(data);
           if (data.msg) {
@@ -190,7 +190,7 @@ const AddQuestionPage = withRouter(
                 ref='searched'
                 value={this.state.inputValue}
                 onChange={this.onChange}
-                placeholder="Введите метку" /> <a href="#" onClick={this.addNewTag}>Добавить новую метку</a>
+                placeholder="Введите метку" /> <a href="javascript:void(0);" onClick={this.addNewTag}>Добавить новую метку</a>
               
               <TagsVariants onAddNewTag={this.onAddNewTag} data={this.state.findedTags} />
               <SelectedTags onTagClick={this.onTagClick} data={tags} />

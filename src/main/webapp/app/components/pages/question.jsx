@@ -17,6 +17,8 @@ import timeAgo from '../../utils/time-ago';
 
 import Tags from '../items/tags';
 
+
+
 var QuestionPage = withRouter(React.createClass({
   getInitialState() {
     return {
@@ -25,6 +27,13 @@ var QuestionPage = withRouter(React.createClass({
     };
   },
   componentDidMount() {
+
+    if (this.state.loading) {
+      const id = this.props.params.id;
+      const watchedCount = localStorage.getItem(`q${id}`) || 0;
+      localStorage.setItem(`q${id}`, +watchedCount + 1);
+    }
+
     setTimeout(() =>
       $.ajax({
         url: `${window.config.basename}/api/question/${this.props.params.id}`,
@@ -58,10 +67,12 @@ var QuestionPage = withRouter(React.createClass({
         console.log(data);
         if (data.msg) {
 
-          if (data.msg == "Wrong token") {
+          if (data.msg == 'Wrong token' || data.code == '404') {
             auth.logout();
             return this.props.router.replace('/login');
           }
+
+          $(message).val('');
 
           const { location } = this.props
 

@@ -1,18 +1,21 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
-import auth from '../../auth';
+import { withRouter  } from 'react-router';
 
-const QuestionsByTagPage = React.createClass({
-  render() {
-    const token = auth.getToken()
+import Questions from '../items/questions';
 
-    return (
-      <DocumentTitle title='Dashboard'>
-        <div>1234456
-        </div>
-      </DocumentTitle>
-    )
-  }
-});
+const QuestionsByTagPage = withRouter(
+  React.createClass({
+    render() {
+      const tag = this.props.params.name;
+
+      return (
+        <DocumentTitle title={`Вопросы с тегом "${tag}"`}>
+          <Questions tag={tag} fetched="false" />
+        </DocumentTitle>
+      );
+    }
+  })
+)
 
 export default QuestionsByTagPage;

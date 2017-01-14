@@ -5,7 +5,7 @@ var HomePage = React.createClass({
   render() {
     return (
       <div>
-        <Questions fetch="false" />
+        <Questions fetched="false" />
       </div>
     );
   }
