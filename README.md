@@ -1,5 +1,14 @@
-Spring 4 MVC + ReactJS
-===============================
+# Spring 4 MVC + ReactJS
+
+![alt tag](src/main/webapp/resources/preview.png)
+
+Very light version of [stackoverflow](http://stackoverflow.com/) build by [ReactJS](https://facebook.github.io/react/) (client-side) and [Spring4](https://spring.io/) (server-side).
+
+## Features
+
+- Authorization system (by [json web token](https://jwt.io/))
+- Questions, answers, users, reputation, tags and votes!
+- Localization in react using [localizify](https://github.com/noveogroup-amorgunov/localizify)
 
 ## Intallation
 
