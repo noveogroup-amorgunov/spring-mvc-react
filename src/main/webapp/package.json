@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alexander Morgunov <fxl@list.ru>",
@@ -11,6 +13,8 @@
   "dependencies": {
     "history": "^2.1.2",
     "jquery": "^3.1.1",
+    "json-loader": "^0.5.4",
+    "localizify": "^1.0.1",
     "prismjs": "^1.6.0",
     "react": "^15.4.0",
     "react-document-title": "^2.0.2",
