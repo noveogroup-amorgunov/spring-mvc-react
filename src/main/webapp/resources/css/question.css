@@ -558,3 +558,22 @@ input:focus {
   .narrow .mini-counts {
       margin-bottom: 2px;
   }
+
+  .language-switcher span {
+    padding: 3px;
+    cursor: pointer;
+  }
+
+  .language-switcher .active {
+    font-weight: bold;
+    color: white;
+    background: #222;
+    padding: 0 1px 0 2px;
+  }
+
+
+
+  .language-switcher {
+    font-size: 0.9em;
+    padding-left: 15px;
+  }

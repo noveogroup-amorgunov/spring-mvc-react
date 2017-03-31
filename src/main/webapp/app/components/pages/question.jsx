@@ -2,6 +2,7 @@ import React from 'react';
 import Prism from 'prismjs';
 import Loader from '../utils/loader';
 import $ from 'jquery';
+import { t } from 'localizify';
 
 import { withRouter  } from 'react-router';
 import Answers from '../items/answers';
@@ -126,24 +127,24 @@ var QuestionPage = withRouter(React.createClass({
         <UserSign data={data} />
         <div style={{ paddingLeft: '65px' }} className="padding-top-10">
           <Tags data={tags} />
-          <div className="padding-top-10 share-block"><a href="#">Поделиться</a>&nbsp;&nbsp;<a href="#">Пожаловаться</a></div>
+          <div className="padding-top-10 share-block"><a href="#">{t('Share')}</a>&nbsp;&nbsp;<a href="#">{t('Report')}</a></div>
         </div>
 
         <hr className="light padding-top-10 margin-top-20" />
-        <h1>Ответы</h1>
+        <h1>{t('Answers')}</h1>
         <Answers data={answers} />
 
-        <b>Добавить ответ:</b>
+        <b>{t('Add answer')}:</b>
         
         <form className={auth.loggedIn() ? '' : 'hide'} name="answers" action="answers" method="post" onSubmit={this.handleSubmit}>
             <div className="message color-red"></div>
-            Сообщение <textarea onChange={this.onChangeAnswer} ref="message" name="message" required="required"></textarea><br />
+            {t('Message')} <textarea onChange={this.onChangeAnswer} ref="message" name="message" required="required"></textarea><br />
             <hr className="light" />
             <div className="preview"></div>
             <hr className="light" />            
             <input className="btn btn-block btn-social btn-github" type="submit" value="Отправить" />
         </form>
-        <div className={!auth.loggedIn() ? '' : 'hide'}><br />Необходима авторизация</div>
+        <div className={!auth.loggedIn() ? '' : 'hide'}><br />{t('You should auth')}</div>
       </div>
     );
   }

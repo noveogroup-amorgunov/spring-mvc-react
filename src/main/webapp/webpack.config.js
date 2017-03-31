@@ -13,6 +13,9 @@ const defaults = {
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components|public)/,
       loader: "babel"
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
     }],
   },
   resolve: {

@@ -1,5 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
+import { t } from 'localizify';
+
 import declOfNum from '../../utils/number-dec';
 import timeAgo from '../../utils/time-ago';
 import formatText from '../../utils/format-str';
@@ -14,10 +16,10 @@ const AnswerListSmallItem = React.createClass({
     const { id, comment, created_at, user, updated_at, votes } = this.props.data;
 
     const popular = votes.filter(t => t.mark === 'UP').length - votes.filter(t => t.mark === 'DOWN').length;
-    const popularText = declOfNum(popular, [`голос`, `голоса`, `голосов`]);
+    const popularText = declOfNum(popular, [t('vote'), t('votes'), t('votes-2')]);
     const html = formatText(comment);
 
-    const data = { user, created_at, text: `Ответ дан ` };
+    const data = { user, created_at, text: t('Answered') };
 
     return (
       <div className="answer-summary narrow" id={`answer-summary-${id}`}>
@@ -36,7 +38,7 @@ const AnswerListSmall = React.createClass({
     const data = this.props.data;
 
     if (!data || !data.length) {
-      return ( <div>Пользователь не оставлял вопросов</div> );
+      return ( <div>{t('User haven\'t questions yet')}</div> );
     }
 
     return (

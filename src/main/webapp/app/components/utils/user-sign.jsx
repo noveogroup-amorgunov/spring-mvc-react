@@ -1,13 +1,13 @@
 import React from 'react';
 import timeAgo from '../../utils/time-ago';
 import { Link } from 'react-router';
+import { t } from 'localizify';
 
 const Answer = React.createClass({
   render() {
     const user = this.props.data.user;
     const created_at = this.props.data.created_at;
-    const text = this.props.data.text || `Задан`;
-
+    const text = this.props.data.text || t('Asked');
 
     return (
       <div className="user-info clear">

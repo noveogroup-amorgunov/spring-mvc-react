@@ -1,10 +1,10 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 import { withRouter  } from 'react-router';
+import { t } from 'localizify';
 
 import UserService from '../../services/user';
 import auth from '../../auth';
-import t from '../../utils/messages';
 
 const ChangePasswordPage = withRouter(
   React.createClass({
@@ -53,12 +53,12 @@ const ChangePasswordPage = withRouter(
       const name = auth.getName();
 
       return (
-        <DocumentTitle title='Изменить пароль'>
+        <DocumentTitle title={t('Change password')}>
           <div>
             <form onSubmit={this.handleSubmit}>
-              <label><input required="required" type="password" ref="old_pass" placeholder="Введите старый пароль" /></label><br />
-              <label><input required="required" type="password" ref="pass" placeholder="Введите новый пароль" /></label><br />
-              <button className="btn btn-block btn-social btn-linkedin" type="submit">Сменить пароль</button>
+              <label><input required="required" type="password" ref="old_pass" placeholder={t('Type old password')} /></label><br />
+              <label><input required="required" type="password" ref="pass" placeholder={t('Type new password')} /></label><br />
+              <button className="btn btn-block btn-social btn-linkedin" type="submit">{t('Change password 2')}</button>
               {this.state.error && (
                 <p>{this.state.message}</p>
               )}

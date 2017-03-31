@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from '../utils/loader';
 import TagService from '../../services/tag';
+import { t } from 'localizify';
 
 import { Link } from 'react-router';
 
@@ -35,7 +36,7 @@ const TagsPage = React.createClass({
         <div className="tags">
             {data.map((item, index) =>
               <div key={index} style={{float: 'none'}}>
-                <Link to ={`/questions/tagged/${item.name}`} className="post-tag" title="показать вопросы с меткой «{item.name}»">{item.name}</Link>
+                <Link to ={`/questions/tagged/${item.name}`} className="post-tag" title={t('how questions by tag «{tag}»', { tag: item.name })}>{item.name}</Link>
                 <span style={{paddingRight: '6px', color: '#777', fontSize: '11px'}}>x {item.popular}</span>
               </div> 
             )}

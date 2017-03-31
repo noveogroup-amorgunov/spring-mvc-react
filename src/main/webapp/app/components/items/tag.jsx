@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router';
+import { t } from 'localizify';
 
 const Tag = React.createClass({
   render() {
@@ -9,7 +10,7 @@ const Tag = React.createClass({
     return (
       <Link to={`/questions/tagged/${name}`}
         className="post-tag" 
-        title={`показать вопросы с меткой «${name}»`} 
+        title={t('Show question with tag «{name}»', { name })}
         rel="tag">
         {name}
       </Link>

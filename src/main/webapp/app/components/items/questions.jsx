@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { t } from 'localizify';
 
 import Question from './question';
 import Loader from '../utils/loader';
@@ -36,12 +37,12 @@ const Questions = React.createClass({
     const tag = this.props.tag;
 
     if (!data || !data.length) {
-      return (<div>Вопросов пока нет</div>);
+      return (<div>{t('Questions hasn\'t exist yet')}</div>);
     }
 
     return (
       <div>
-        { tag && (<h2>Вопросы с тегом "{tag}"</h2>) }
+        { tag && (<h2>{t('Questions by tag «{tag}»', { tag })}</h2>) }
         <div className="question-list">
           {data.map((item, index) => 
             <div key={index}>

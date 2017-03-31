@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Router, useRouterHistory /*, browserHistory*/ } from 'react-router'
+import { Router, useRouterHistory /*, browserHistory*/ } from 'react-router';
+import localizify from 'localizify';
+import { createHistory } from 'history';
+
+import en from './messages/en.json';
+import ru from './messages/ru.json';
 
 import routes from 'routers/routers.jsx';
 
-import { createHistory } from 'history'
+localizify
+  .add('en', en)
+  .add('ru', ru)
+  .setLocale(localStorage.locale || 'en');
 
 const browserHistory = useRouterHistory(createHistory)({
   basename: window.config.basename

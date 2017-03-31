@@ -1,5 +1,5 @@
-import React        from 'react';
-import $            from 'jquery';
+import React from 'react';
+import $ from 'jquery';
 import { Link } from 'react-router';
 import auth from '../auth';
 
