@@ -3,7 +3,7 @@ import timeAgo from '../../utils/time-ago';
 import { Link } from 'react-router';
 import { t } from 'localizify';
 
-const Answer = React.createClass({
+const UserSign = React.createClass({
   render() {
     const user = this.props.data.user;
     const created_at = this.props.data.created_at;
@@ -25,4 +25,4 @@ const Answer = React.createClass({
   }
 });
 
-export default Answer;
+export default UserSign;

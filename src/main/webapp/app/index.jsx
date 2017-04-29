@@ -15,6 +15,8 @@ localizify
   .add('ru', ru)
   .setLocale(localStorage.locale || 'en');
 
+// console.log(localizify.getLocale());
+
 const browserHistory = useRouterHistory(createHistory)({
   basename: window.config.basename
 });

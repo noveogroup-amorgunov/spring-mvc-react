@@ -11,14 +11,14 @@ const DURATION_IN_SECONDS = {
   second: 1
 };
 
-const TRANSLATIONS = {
+const getTranslations = () => ({
   year:   [t('year'), t('years'), t('years 2')],
   month:  [t('month'), t('months'), t('months 2')],
   day:    [t('day'), t('days'), t('days 2')],
   hour:   [t('hour'), t('hours'), t('hours 2')],
   minute: [t('minute'), t('minutes'), t('minutes 2')],
   second: [t('second'), t('seconds'), t('seconds 2')]
-};
+});
 
 function getDuration(seconds) {
   var epoch, interval;
@@ -27,7 +27,7 @@ function getDuration(seconds) {
     epoch = DURATION_IN_SECONDS.epochs[i];
     interval = Math.floor(seconds / DURATION_IN_SECONDS[epoch]);
     if (interval >= 1) {
-      return { interval: interval, epoch: declOfNum(interval, TRANSLATIONS[epoch]) };
+      return { interval: interval, epoch: declOfNum(interval, getTranslations()[epoch]) };
     }
   }
 }

@@ -73,7 +73,7 @@ var QuestionPage = withRouter(React.createClass({
             return this.props.router.replace('/login');
           }
 
-          $(message).val('');
+          $(this.refs.message).val('');
 
           const { location } = this.props
 

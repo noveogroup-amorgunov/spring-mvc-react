@@ -20,7 +20,8 @@ export default function formatText(comment) {
   // });
 
 
-  let html = safe_tags_replace(comment);
+  // let html = safe_tags_replace(comment);
+  let html = comment;
 
   // console.log(html);
   
