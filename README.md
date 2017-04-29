@@ -44,7 +44,7 @@ Use `npm run watch` for work in watch-mode. When you change some javascript file
 ```shell
 $ mvn jetty:run
 ```
-Access ```http://localhost:8080/spring4ajax```
+Access ```http://localhost:4017/spring4ajax```
 
 To import this project into Eclipse IDE:
 
